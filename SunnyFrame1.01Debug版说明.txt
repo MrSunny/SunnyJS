@@ -1,0 +1,26 @@
+该版本属于Debug测试版，漏洞一定多如鸡毛，望各位兄台多提宝贵意见，不胜感激！
+
+1.修改框架结构
+  SunnyFrame
+	core
+		Sunny-deferScript.js
+	util
+	demo
+		Demo-SunnyDeferLoad.html
+		Demo-SunnyFX.html
+		css
+			defer.css
+		js
+
+2.加入动态加载模块Sunny-deferScript.js
+3.修改动画组件的一些bug，具体bug可在动画组件中查看
+4.加入测试Demo，相见demo目录
+
+
+Update: @date 2011-10-28
+1.  修正IE、FF、OPERA无法动态加载CSS文件的问题。
+
+详情咨询:
+Email: 317665171@qq.com
+QQ: 317665171 
+By: Mr.Zhou

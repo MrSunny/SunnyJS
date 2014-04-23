@@ -1,0 +1,26 @@
+﻿/**
+ * @Des defer.css Sunny-deferScript模块动态加载演示css文件
+ * @Since 2011.10.27
+ * @Author Mr.Zhou
+ * @Version 1.0 DEBUG
+ * @Copyright (c) 2011 Mr.Zhou
+ * @Licensed under the MIT3.0 license.
+ */
+#box{
+    position:absolute;
+    left:50px;
+    top:50px;
+    
+    width:100px;
+    height:100px;
+	
+	border:1px solid;
+    
+    background-color:#ccc;
+}
+p{
+	margin-top:200px;
+	font-size:12px;
+	line-height:22px;
+	text-align:center;
+}

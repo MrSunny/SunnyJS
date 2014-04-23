@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="company" content="NTCSoft" />
+    <meta name="author" content="MrZhou" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>Demo-SunnyDeferLoad</title>
+</head>
+
+<body>
+	<p id="msg">开始自动加载其他模块！</p>
+    <button id="go">Go!</button>
+    <div id="box"></div>
+    <script type="text/javascript" src="../core/Sunny-deferScript.js"></script>
+    <script type="text/javascript">
+    setTimeout(function(){
+	DeferLoad.load("css","css/defer.css",function(){
+		var oMsg = document.getElementById("msg");
+		oMsg.innerHTML = "样式模块defer.css加载完成！";
+		
+		setTimeout(function(){
+			loadSunnyCore(function(){
+				oMsg.innerHTML += "<br />Sunny框架核心模块Sunny-Base.js、Sunny.js加载完成！";
+				setTimeout(function(){
+					loadSunnyFX(function(){
+						oMsg.innerHTML += "<br />Sunny框架动画模块Sunny-fx.js加载完成！<br />请点击【Go!】按钮开始执行动画";
+					});
+				},2000)//eOf loadSunnyFX
+			});
+		},2000)//eOf loadSunnyCore
+	})//eOf DeferLoad.load
+	},2000);
+	/**
+	 * loadSunnyCore{Function function}:加载Sunny框架核心部分，包括Sunny-Base.js和Sunny.js
+	 * @param {Function function} :加载完成后的回调函数
+	 */
+	function loadSunnyFX(callBack){
+		DeferLoad.load("js","../util/Sunny-fx.js",function(){
+	        Sunny.getNode("go").onclick = showAni;
+		
+			function showAni(){
+				/**
+				 * Example: 创建SunnyFX类的实例对象
+				 * @param {Sunny SunnyFX} 动画类（继承自Sunny类）
+				 * @param {Object Array} SunnyFX类构造函数参数，提供该实例描述性信息（可选）
+				 */  
+				var sfxQueue = New(Sunny.SunnyFX,["1.0","周源","2011.11","基于SunnyJS构建的动画组件"]);
+				/**
+				 * Example:调用动画实例对象的animate方法，实现简单动画
+				 * @param {HTMLElement} 执行动画的目标HTML元素（必须）
+				 * @param {Object JSON} 动画的样式内容（必须）
+				 * @param {int|float} 	动画执行时间（可选）
+				 * @param {Function function} 	动画执行完毕后的回调函数（可选）
+				 */ 
+				sfxQueue.animate(sfxQueue.getNode("box"),{width:50,height:50},1000,"easeInOut")
+					.animate(sfxQueue.getNode("box"),{backgroundColor:"#369"},1000,"easeInOut")
+					.animate(sfxQueue.getNode("box"),{opacity:0.3},1000,"easeInOut")
+					.animate(sfxQueue.getNode("box"),{left:200},1000,"bounceEaseOut")
+					.animate(sfxQueue.getNode("box"),{top:300},1000,"elasticEaseOut")
+					.animate(sfxQueue.getNode("box"),{width:100,height:100,opacity:1,left:50,top:50},1000,"easeInOut",
+						function(){alert("动画执行完毕")})
+			}
+			//执行回调
+			callBack && callBack();
+		})//eOf load Sunny-fx
+	}
+	
+	/**
+	 * loadSunnyCore{Function function}:加载Sunny框架核心部分，包括Sunny-Base.js和Sunny.js
+	 * @param {Function function} :加载完成后的回调函数
+	 */
+    function loadSunnyCore(callBack){
+		DeferLoad.load("js","../Sunny-Base.js",function(){
+    		DeferLoad.load("js","../Sunny.js",callBack)//eOf load Sunny
+		})//eOf load Sunny-Base
+    }
+    </script>
+</body>
+</html>

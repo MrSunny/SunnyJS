@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="company" content="NTCSoft" />
+    <meta name="author" content="MrZhou" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>Demo-SunnyFX</title>
+	<style type="text/css">
+    #box{
+        position:absolute;
+        left:50px;
+        top:50px;
+        
+        width:100px;
+        height:100px;
+		
+		border:1px solid;
+        
+        background-color:#ccc;
+    }
+    </style>
+</head>
+
+<body>
+    <button id="go">Go!</button>
+    <div id="box"></div>
+    <script type="text/javascript" src="../Sunny-Base.js"></script>
+    <script type="text/javascript" src="../Sunny.js"></script>
+    <script type="text/javascript" src="../util/Sunny-fx.js"></script>
+    <script type="text/javascript">
+        Sunny.getNode("go").onclick = showAni;
+	
+		function showAni(){
+			/**
+			 * Example: 创建SunnyFX类的实例对象
+			 * @param {Sunny SunnyFX} 动画类（继承自Sunny类）
+			 * @param {Object Array} SunnyFX类构造函数参数，提供该实例描述性信息（可选）
+			 */  
+			var sfxQueue = New(Sunny.SunnyFX,["1.0","周源","2011.11","基于SunnyJS构建的动画组件"]);
+			/**
+			 * Example:调用动画实例对象的animate方法，实现简单动画
+			 * @param {HTMLElement} 执行动画的目标HTML元素（必须）
+			 * @param {Object JSON} 动画的样式内容（必须）
+			 * @param {int|float} 	动画执行时间（可选）
+			 * @param {Function function} 	动画执行完毕后的回调函数（可选）
+			 */ 
+			sfxQueue.animate(sfxQueue.getNode("box"),{width:50,height:50},1000,"easeInOut")
+				.animate(sfxQueue.getNode("box"),{backgroundColor:"#369"},1000,"easeInOut")
+				.animate(sfxQueue.getNode("box"),{opacity:0.3},1000,"easeInOut")
+				.animate(sfxQueue.getNode("box"),{left:200},1000,"bounceEaseOut")
+				.animate(sfxQueue.getNode("box"),{top:300},1000,"elasticEaseOut")
+				.animate(sfxQueue.getNode("box"),{width:100,height:100,opacity:1,left:50,top:50},1000,"easeInOut",
+					function(){alert("动画执行完毕")})
+		}
+    </script>
+</body>
+</html>
